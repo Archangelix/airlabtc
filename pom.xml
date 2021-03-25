@@ -84,6 +84,17 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <id>exec-kubectl-undeploy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>kubectl</executable>
+                            <commandlineArgs>--ignore-not-found=true  delete deployment airlabtc</commandlineArgs>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>exec-kubectl-deploy</id>
                         <phase>package</phase>
                         <goals>
