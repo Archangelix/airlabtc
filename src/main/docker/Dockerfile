@@ -15,7 +15,7 @@ RUN chown -R trent:gemalto $APP_LIB \
     && chmod -R g+rx $APP_BIN
 
 # Define entry point...
-ENTRYPOINT ["startServer.sh"]
+ENTRYPOINT ["bash", "startServer.sh"]
 CMD [""]
 
 # Run as bob...
