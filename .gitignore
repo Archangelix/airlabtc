@@ -1,6 +1,7 @@
+builds
+node_modules
+target
 .classpath
 .project
 .settings
-builds
-target
 config.toml

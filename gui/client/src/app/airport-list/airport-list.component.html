@@ -1,0 +1,28 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">ICAO</th>
+          <th scope="col">Lat</th>
+          <th scope="col">Lng</th>
+          <th scope="col">Alt</th>
+          <th scope="col">IATA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let airport of airports">
+          <td>{{ airport.uid }}</td>
+          <td>{{ airport.name }}</td>
+          <td>{{ airport.icao }}</td>
+          <td>{{ airport.lat }}</td>
+          <td>{{ airport.lng }}</td>
+          <td>{{ airport.alt }}</td>
+          <td>{{ airport.iata }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
