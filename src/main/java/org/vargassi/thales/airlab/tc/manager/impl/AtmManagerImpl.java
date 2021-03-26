@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.vargassi.thales.airlab.tc.manager.AtmManager;
@@ -30,12 +31,20 @@ public class AtmManagerImpl implements AtmManager {
 
     @Override
     public List<Waypoint> retrieveWaypointsMostAssociatedToSids(String airportUid) {
+        if (airportUid==null || airportUid.isEmpty()) {
+            return Lists.newArrayList();
+        }
+        airportUid = airportUid.toUpperCase();
         List<Sid> sids = atmProxy.retrieveSids(airportUid);
         return extractTwoMostAssociatedWaypoints(sids);
     }
 
     @Override
     public List<Waypoint> retrieveWaypointsMostAssociatedToStars(String airportUid) {
+        if (airportUid==null || airportUid.isEmpty()) {
+            return Lists.newArrayList();
+        }
+        airportUid = airportUid.toUpperCase();
         List<Star> stars = atmProxy.retrieveStars(airportUid);
         return extractTwoMostAssociatedWaypoints(stars);
     }

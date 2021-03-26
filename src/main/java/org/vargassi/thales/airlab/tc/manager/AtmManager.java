@@ -1,7 +1,6 @@
 package org.vargassi.thales.airlab.tc.manager;
 
 import java.util.List;
-import java.util.Set;
 
 import org.vargassi.thales.airlab.tc.model.Airport;
 import org.vargassi.thales.airlab.tc.model.Waypoint;

@@ -14,6 +14,10 @@ public class Star implements IContainWaypoints {
     
     private List<Waypoint> waypoints;
 
+    public Star() {
+        
+    }
+    
     public Star(String name, Airport airport, List<Waypoint> waypoints) {
         super();
         this.name = name;
