@@ -28,6 +28,21 @@ public class Airport {
     
     private String iata;
 
+    public Airport() {
+        super();
+    }
+
+    public Airport(String name, BigDecimal coordinate) {
+        super();
+        this.uid = name;
+        this.name = name;
+        this.icao = name;
+        this.lat = coordinate;
+        this.lng = coordinate;
+        this.alt = coordinate.intValue();
+        this.iata = name;
+    }
+
     public String getUid() {
         return uid;
     }

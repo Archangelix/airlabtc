@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonInclude(Include.NON_DEFAULT)
@@ -75,4 +76,21 @@ public class Waypoint {
                 .add("lng", lng)
                 .toString();
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Waypoint campaign = (Waypoint) o;
+        return Objects.equal(getUid(), campaign.getUid()) 
+                && Objects.equal(getName(), campaign.getName())
+                && Objects.equal(getLat(), campaign.getLat())
+                && Objects.equal(getLng(), campaign.getLng());
+    }
+
 }

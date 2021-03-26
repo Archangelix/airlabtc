@@ -23,6 +23,7 @@
         <dockerfile-maven-version>1.4.3</dockerfile-maven-version>
         <guava.version>27.0.1-jre</guava.version>
         <javaee.version>7.0</javaee.version>
+        <mockito.version>2.25.1</mockito.version>
     </properties>
 
     <build>
@@ -109,16 +110,11 @@
                     </execution>
                 </executions>
             </plugin>
+			
         </plugins>
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -176,7 +172,24 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

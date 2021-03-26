@@ -1,12 +1,17 @@
 package org.vargassi.thales.airlab.tc.manager.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.vargassi.thales.airlab.tc.manager.AtmManager;
 import org.vargassi.thales.airlab.tc.model.Airport;
+import org.vargassi.thales.airlab.tc.model.IContainWaypoints;
 import org.vargassi.thales.airlab.tc.model.Waypoint;
 import org.vargassi.thales.airlab.tc.proxy.AtmProxy;
 import org.vargassi.thales.airlab.tc.proxy.Sid;
@@ -26,28 +31,70 @@ public class AtmManagerImpl implements AtmManager {
     @Override
     public List<Waypoint> retrieveWaypointsMostAssociatedToSids(String airportUid) {
         List<Sid> sids = atmProxy.retrieveSids(airportUid);
-        if (sids==null || sids.isEmpty()) {
-            return new ArrayList<>();
-        }
-        Sid star = sids.get(0);
-        List<Waypoint> waypoints = star.getWaypoints();
-        if (waypoints==null) {
-            return new ArrayList<>();
-        }
-        return waypoints;
+        return extractTwoMostAssociatedWaypoints(sids);
     }
 
     @Override
     public List<Waypoint> retrieveWaypointsMostAssociatedToStars(String airportUid) {
         List<Star> stars = atmProxy.retrieveStars(airportUid);
-        if (stars==null || stars.isEmpty()) {
-            return new ArrayList<>();
-        }
-        Star star = stars.get(0);
-        List<Waypoint> waypoints = star.getWaypoints();
-        if (waypoints==null) {
-            return new ArrayList<>();
-        }
-        return waypoints;
+        return extractTwoMostAssociatedWaypoints(stars);
     }
+    
+    private List<Waypoint> extractTwoMostAssociatedWaypoints(List<? extends IContainWaypoints> sids) {
+        if (sids==null || sids.isEmpty()) {
+            return new ArrayList<>();
+        }
+        
+        Map<Waypoint, Integer> counterMapOfWaypoints = extractCounterMap(sids);
+        
+        List<Waypoint> result = new ArrayList<>();
+        Optional<Waypoint> hottestWp = findAndRemoveHottestWaypoint(counterMapOfWaypoints);
+        if (hottestWp.isPresent()) {
+            result.add(hottestWp.get());
+        } else {
+            return result;
+        }
+        
+        hottestWp = findAndRemoveHottestWaypoint(counterMapOfWaypoints);
+        if (hottestWp.isPresent()) {
+            result.add(hottestWp.get());
+        } else {
+            return result;
+        }
+        
+        return result;
+    }
+
+    private Map<Waypoint, Integer> extractCounterMap(List<? extends IContainWaypoints> objects) {
+        Map<Waypoint, Integer> counterMapOfWaypoints = new HashMap<>();
+        for (IContainWaypoints obj: objects) {
+            List<Waypoint> waypoints = obj.getWaypoints();
+            for (Waypoint wp: waypoints) {
+                Integer count = 1;
+                if (counterMapOfWaypoints.containsKey(wp)) {
+                    count = counterMapOfWaypoints.get(wp) + 1;
+                }
+                counterMapOfWaypoints.put(wp, count);
+            }
+        }
+        return counterMapOfWaypoints;
+    }
+    
+    private Optional<Waypoint> findAndRemoveHottestWaypoint(Map<Waypoint, Integer> map) {
+        if (map.isEmpty()) {
+            return Optional.empty();
+        }
+        
+        Collection<Integer> counters = map.values();
+        int maxCounter = counters.stream().mapToInt(Integer::valueOf).max().getAsInt();
+        Optional<Waypoint> hottestWp = map.entrySet().stream()
+                .filter(entry -> entry.getValue()==maxCounter)
+                .map(entry -> entry.getKey())
+                .findFirst();
+        if (hottestWp.isPresent()) {
+            map.remove(hottestWp.get());
+        }
+        return hottestWp;
+    }
+
 }

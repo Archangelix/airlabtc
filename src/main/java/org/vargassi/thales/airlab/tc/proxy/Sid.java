@@ -3,9 +3,10 @@ package org.vargassi.thales.airlab.tc.proxy;
 import java.util.List;
 
 import org.vargassi.thales.airlab.tc.model.Airport;
+import org.vargassi.thales.airlab.tc.model.IContainWaypoints;
 import org.vargassi.thales.airlab.tc.model.Waypoint;
 
-public class Sid {
+public class Sid implements IContainWaypoints {
     
     private String name;
     
@@ -13,6 +14,17 @@ public class Sid {
     
     private List<Waypoint> waypoints;
 
+    public Sid() {
+    
+    }
+    
+    public Sid(String name, Airport airport, List<Waypoint> waypoints) {
+        super();
+        this.name = name;
+        this.airport = airport;
+        this.waypoints = waypoints;
+    }
+    
     public String getName() {
         return name;
     }
@@ -29,6 +41,7 @@ public class Sid {
         this.airport = airport;
     }
 
+    @Override
     public List<Waypoint> getWaypoints() {
         return waypoints;
     }
