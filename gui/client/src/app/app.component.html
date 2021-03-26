@@ -1,14 +1,15 @@
 <div class="container">
     <div class="row">
 		<div class="col-md-12">
-		    <div class="card bg-dark my-5">
+		    <div class="card bg-dark my-2">
 				<div class="card-body">
-					<h2 class="card-title text-center text-white py-3">{{ title }}</h2>
+					<h2 class="card-title text-center text-white py-3">AirLAB Traffic Management</h2>
 				</div>
 			</div>
 			<div class="card my-5">
 			    <div class="card-body">
-					<table class="table table-bordered table-striped">
+					<h5 class="card-title">List of Airports</h5>
+					<table class="table table-bordered table-hover">
 					    <thead class="thead-dark">
 							<tr>
 							  <th scope="col">UID</th>
@@ -21,7 +22,7 @@
 							</tr>
 					    </thead>
 					    <tbody>
-							<tr *ngFor="let airport of airports">
+							<tr *ngFor="let airport of airports; let i = index" (click)="ClickedRow(i)" [class.active]="i == highlightRow">
 							  <td>{{ airport.uid }}</td>
 							  <td>{{ airport.name }}</td>
 							  <td>{{ airport.icao }}</td>
@@ -34,42 +35,47 @@
 					</table>
 			    </div>
 			</div>
-		    <div class="card bg-dark my-5">
-				<div class="card-body">
-					<ul class="text-center list-inline py-3">
-						<li class="list-inline-item">
-							<input type="text" placeholder="Airport UID" #airportUid />
-							<button (click)="retrieveWaypointsFromSids(airportUid.value)">Retrieve Waypoints - SID</button>
-							<button (click)="retrieveWaypointsFromStars(airportUid.value)">Retrieve Waypoints - STAR</button>
-						</li>
-					</ul>
-				</div>
-			</div>
 			<div class="card my-5">
 			    <div class="card-body">
+					<h5 class="card-title">List of Hot Waypoints by SID</h5>
 					<table class="table table-bordered table-striped">
 					    <thead class="thead-dark">
 							<tr>
-							  <th scope="col">UID</th>
 							  <th scope="col">Name</th>
-							  <th scope="col">ICAO</th>
-							  <th scope="col">Lat</th>
-							  <th scope="col">Lng</th>
-							  <th scope="col">Alt</th>
-							  <th scope="col">IATA</th>
+							  <th scope="col">Count</th>
 							</tr>
 					    </thead>
-					    <tbody>
-							<tr *ngFor="let airport of airports">
-							  <td>{{ airport.uid }}</td>
-							  <td>{{ airport.name }}</td>
-							  <td>{{ airport.icao }}</td>
-							  <td>{{ airport.lat }}</td>
-							  <td>{{ airport.lng }}</td>
-							  <td>{{ airport.alt }}</td>
-							  <td>{{ airport.iata }}</td>
+					    <tbody *ngIf="sidWaypoints.length > 0">
+							<tr *ngFor="let waypoint of sidWaypoints;" >
+							  <td>{{ waypoint.name }}</td>
+							  <td>{{ waypoint.count }}</td>
 							</tr>
-					  </tbody>
+						</tbody>
+					    <tbody *ngIf="sidWaypoints.length == 0">
+							  <td colspan=2 align="center">No waypoints found.</td>
+						</tbody>
+					</table>
+			    </div>
+			</div>
+			<div class="card my-5">
+			    <div class="card-body">
+					<h5 class="card-title">List of Hot Waypoints by STAR</h5>
+					<table class="table table-bordered table-striped">
+					    <thead class="thead-dark">
+							<tr>
+							  <th scope="col">Name</th>
+							  <th scope="col">Count</th>
+							</tr>
+					    </thead>
+					    <tbody *ngIf="sidWaypoints.length > 0">
+							<tr *ngFor="let waypoint of starWaypoints">
+							  <td>{{ waypoint.name }}</td>
+							  <td>{{ waypoint.count }}</td>
+							</tr>
+						</tbody>
+					    <tbody *ngIf="sidWaypoints.length == 0">
+							  <td colspan=2 align="center">No waypoints found.</td>
+						</tbody>
 					</table>
 			    </div>
 			</div>

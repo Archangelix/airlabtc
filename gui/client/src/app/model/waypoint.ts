@@ -3,4 +3,5 @@ export class Waypoint {
     name: string = "";
     lat: number = 0;
     lng: number = 0;
+	count: number = 0;
 }

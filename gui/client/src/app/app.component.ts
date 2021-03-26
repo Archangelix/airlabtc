@@ -14,10 +14,20 @@ export class AppComponent {
 
   airports: Airport[] = [];
 
-  waypoints: Waypoint[] = [];
+  sidWaypoints: Waypoint[] = [];
+  starWaypoints: Waypoint[] = [];
+  
+  highlightRow : Number = 0;  
+  
+  ClickedRow:any;  
   
   constructor(private airportService: AirportService) {
     this.title = 'Spring Boot - Angular Application';
+	this.ClickedRow = function(index: number) {
+		var airportUid: string = this.airports[index].uid
+		this.retrieveWaypointsFromSids(airportUid);
+		this.retrieveWaypointsFromStars(airportUid);
+	}  
   }
   
   ngOnInit() {
@@ -28,13 +38,13 @@ export class AppComponent {
   
   retrieveWaypointsFromSids(airportUid: string) {
 	this.airportService.findWaypointsFromSids(airportUid).subscribe((data: Waypoint[]) => {
-      this.waypoints  = data;
+      this.sidWaypoints  = data;
     });
   }
   
   retrieveWaypointsFromStars(airportUid: string) {
 	this.airportService.findWaypointsFromStars(airportUid).subscribe((data: Waypoint[]) => {
-      this.waypoints  = data;
+      this.starWaypoints  = data;
     });
   }
   
