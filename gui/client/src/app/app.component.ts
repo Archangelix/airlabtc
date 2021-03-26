@@ -10,20 +10,18 @@ import { AirportService } from './service/airport.service';
 })
 export class AppComponent {
 
-  title: string;
-
   airports: Airport[] = [];
 
   sidWaypoints: Waypoint[] = [];
   starWaypoints: Waypoint[] = [];
   
-  highlightRow : Number = 0;  
+  highlightRow : Number = -1;  
   
   ClickedRow:any;  
   
   constructor(private airportService: AirportService) {
-    this.title = 'Spring Boot - Angular Application';
 	this.ClickedRow = function(index: number) {
+		this.highlightRow = index;
 		var airportUid: string = this.airports[index].uid
 		this.retrieveWaypointsFromSids(airportUid);
 		this.retrieveWaypointsFromStars(airportUid);
