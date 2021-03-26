@@ -8,4 +8,8 @@ public interface AtmProxy {
 
     List<Airport> getAllAirports();
 
+    List<Sid> retrieveSids(String airportUid);
+
+    List<Star> retrieveStars(String airportUid);
+
 }
