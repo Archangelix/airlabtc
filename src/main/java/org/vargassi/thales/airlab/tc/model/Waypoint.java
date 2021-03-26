@@ -23,6 +23,8 @@ public class Waypoint {
     
     private BigDecimal lng;
     
+    private int count;
+    
     public Waypoint () {
         
     }
@@ -67,6 +69,14 @@ public class Waypoint {
         this.lng = lng;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -74,9 +84,15 @@ public class Waypoint {
                 .add("name", name)
                 .add("lat", lat)
                 .add("lng", lng)
+                .add("count", count)
                 .toString();
     }
     
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getUid(), getName(), getLat(), getLng());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -86,11 +102,11 @@ public class Waypoint {
             return false;
         }
 
-        Waypoint campaign = (Waypoint) o;
-        return Objects.equal(getUid(), campaign.getUid()) 
-                && Objects.equal(getName(), campaign.getName())
-                && Objects.equal(getLat(), campaign.getLat())
-                && Objects.equal(getLng(), campaign.getLng());
+        Waypoint obj = (Waypoint) o;
+        return Objects.equal(getUid(), obj.getUid()) 
+                && Objects.equal(getName(), obj.getName())
+                && Objects.equal(getLat(), obj.getLat())
+                && Objects.equal(getLng(), obj.getLng());
     }
 
 }

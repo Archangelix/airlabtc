@@ -93,6 +93,7 @@ public class AtmManagerImpl implements AtmManager {
                 .findFirst();
         if (hottestWp.isPresent()) {
             map.remove(hottestWp.get());
+            hottestWp.get().setCount(maxCounter);
         }
         return hottestWp;
     }
