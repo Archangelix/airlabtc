@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Airport } from './model/airport';
 import { Waypoint } from './model/waypoint';
 import { AirportService } from './service/airport.service';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,15 +18,21 @@ export class AppComponent {
   
   highlightRow : Number = -1;  
   
-  ClickedRow:any;  
+  ClickedRow:any;
+  
+  airportUid: string = "";
   
   constructor(private airportService: AirportService) {
 	this.ClickedRow = function(index: number) {
 		this.highlightRow = index;
-		var airportUid: string = this.airports[index].uid
-		this.retrieveWaypointsFromSids(airportUid);
-		this.retrieveWaypointsFromStars(airportUid);
-	}  
+		this.airportUid = this.airports[index].uid
+		this.retrieveWaypointsFromSids(this.airportUid);
+		this.retrieveWaypointsFromStars(this.airportUid);
+	}
+	interval(3000).subscribe((val:any) => { 
+		this.retrieveWaypointsFromSids(this.airportUid);
+		this.retrieveWaypointsFromStars(this.airportUid);
+	});
   }
   
   ngOnInit() {

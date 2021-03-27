@@ -39,4 +39,14 @@ public class AppController {
         return atmManager.retrieveWaypointsMostAssociatedToStars(airportUid);
     }
 
+    @RequestMapping("/counters/inc")
+    public void increaseCounter() {
+        atmManager.increaseCounter();
+    }
+
+    @RequestMapping("/counters/dec")
+    public void decreaseCounter() {
+        atmManager.decreaseCounter();
+    }
+
 }

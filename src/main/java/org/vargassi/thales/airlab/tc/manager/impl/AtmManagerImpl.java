@@ -29,6 +29,8 @@ public class AtmManagerImpl implements AtmManager {
         return atmProxy.getAllAirports();
     }
 
+    private int counter = 0;
+    
     @Override
     public List<Waypoint> retrieveWaypointsMostAssociatedToSids(String airportUid) {
         if (airportUid==null || airportUid.isEmpty()) {
@@ -55,6 +57,11 @@ public class AtmManagerImpl implements AtmManager {
         }
         
         Map<Waypoint, Integer> counterMapOfWaypoints = extractCounterMap(sids);
+        
+        // Manipulate counters just for testing.
+        for (Map.Entry<Waypoint, Integer> entry: counterMapOfWaypoints.entrySet()) {
+            entry.setValue(entry.getValue()+counter);
+        }
         
         List<Waypoint> result = new ArrayList<>();
         Optional<Waypoint> hottestWp = findAndRemoveHottestWaypoint(counterMapOfWaypoints);
@@ -105,6 +112,16 @@ public class AtmManagerImpl implements AtmManager {
             hottestWp.get().setCount(maxCounter);
         }
         return hottestWp;
+    }
+
+    @Override
+    public void increaseCounter() {
+        counter++;
+    }
+
+    @Override
+    public void decreaseCounter() {
+        counter--;
     }
 
 }

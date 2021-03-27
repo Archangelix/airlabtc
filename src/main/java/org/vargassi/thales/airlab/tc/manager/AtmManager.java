@@ -13,4 +13,7 @@ public interface AtmManager {
 
     List<Waypoint> retrieveWaypointsMostAssociatedToStars(String airportUid);
 
+    void increaseCounter();
+    
+    void decreaseCounter();
 }
