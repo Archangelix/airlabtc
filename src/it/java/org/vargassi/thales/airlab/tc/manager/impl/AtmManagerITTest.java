@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.vargassi.thales.airlab.tc.model.Airport;
 import org.vargassi.thales.airlab.tc.model.Waypoint;
+import org.vargassi.thales.airlab.tc.model.gui.GuiWaypoints;
 
 public class AtmManagerITTest {
 
@@ -26,13 +27,7 @@ public class AtmManagerITTest {
     
     @BeforeClass
     public static void initClass() throws IOException, InterruptedException {
-        Thread.sleep(10000);
-//        TestsConfiguration.init();
-//
-//        pactConsumer = new PactConsumer();
-//        pactConsumer.start();
-//
-//        Thread.sleep(3000);
+        Thread.sleep(10000); // Make sure that the pod is ready.
     }
 
     @Test
@@ -59,7 +54,8 @@ public class AtmManagerITTest {
 
         InputStream responseStream = connection.getInputStream();
 
-        List<Waypoint> waypoints = Arrays.asList(mapper.readValue(responseStream, Waypoint[].class));
+        GuiWaypoints result = mapper.readValue(responseStream, GuiWaypoints.class);
+        List<Waypoint> waypoints = Arrays.asList(result.getWaypoints());
         Assertions.assertFalse(waypoints.isEmpty());
     }
     
@@ -73,7 +69,8 @@ public class AtmManagerITTest {
 
         InputStream responseStream = connection.getInputStream();
 
-        List<Waypoint> waypoints = Arrays.asList(mapper.readValue(responseStream, Waypoint[].class));
+        GuiWaypoints result = mapper.readValue(responseStream, GuiWaypoints.class);
+        List<Waypoint> waypoints = Arrays.asList(result.getWaypoints());
         Assertions.assertFalse(waypoints.isEmpty());
     }
     

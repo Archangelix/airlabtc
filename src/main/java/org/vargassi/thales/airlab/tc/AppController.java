@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.vargassi.thales.airlab.tc.manager.AtmManager;
 import org.vargassi.thales.airlab.tc.model.Airport;
 import org.vargassi.thales.airlab.tc.model.Waypoint;
+import org.vargassi.thales.airlab.tc.model.gui.GuiWaypoints;
 
 @RestController
 @CrossOrigin
@@ -29,13 +30,15 @@ public class AppController {
     }
 
     @RequestMapping("/waypoints/sid")
-    public List<Waypoint> getWaypointsMostAssociatedToSids(@RequestParam("icao") String airportIcao) {
-        return atmManager.retrieveWaypointsMostAssociatedToSids(airportIcao);
+    public GuiWaypoints getWaypointsMostAssociatedToSids(@RequestParam("icao") String icao) {
+        List<Waypoint> list = atmManager.retrieveWaypointsMostAssociatedToSids(icao);
+        return new GuiWaypoints(icao, list.toArray(new Waypoint[list.size()]));
     }
 
     @RequestMapping("/waypoints/star")
-    public List<Waypoint> getWaypointsMostAssociatedToStars(@RequestParam("icao") String airportIcao) {
-        return atmManager.retrieveWaypointsMostAssociatedToStars(airportIcao);
+    public GuiWaypoints getWaypointsMostAssociatedToStars(@RequestParam("icao") String icao) {
+        List<Waypoint> list = atmManager.retrieveWaypointsMostAssociatedToStars(icao);
+        return new GuiWaypoints(icao, list.toArray(new Waypoint[list.size()]));
     }
 
     @RequestMapping("/counters/inc")

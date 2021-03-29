@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Airport } from '../model/airport';
 import { Waypoint } from '../model/waypoint';
+import { IcaoAndWaypoints } from '../model/icaoAndWaypoints';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -23,11 +24,11 @@ export class AirportService {
     return this.http.get<Airport[]>(this.airportsUrl);
   }
 
-  public findWaypointsFromSids(icao: string): Observable<Waypoint[]> {
-    return this.http.get<Waypoint[]>(this.waypointsSidUrl+'?icao='+icao);
+  public findWaypointsFromSids(icao: string): Observable<IcaoAndWaypoints> {
+	return this.http.get<IcaoAndWaypoints>(this.waypointsSidUrl+'?icao='+icao);
   }
 
-  public findWaypointsFromStars(icao: string): Observable<Waypoint[]> {
-    return this.http.get<Waypoint[]>(this.waypointsStarUrl+'?icao='+icao);
+  public findWaypointsFromStars(icao: string): Observable<IcaoAndWaypoints> {
+	return this.http.get<IcaoAndWaypoints>(this.waypointsStarUrl+'?icao='+icao);
   }
 }

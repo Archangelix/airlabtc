@@ -3,6 +3,7 @@ import { Airport } from './model/airport';
 import { Waypoint } from './model/waypoint';
 import { AirportService } from './service/airport.service';
 import { interval } from 'rxjs';
+import { IcaoAndWaypoints } from './model/icaoAndWaypoints';
 
 @Component({
   selector: 'app-root',
@@ -42,14 +43,14 @@ export class AppComponent {
   }
   
   retrieveWaypointsFromSids(icao: string) {
-	this.airportService.findWaypointsFromSids(icao).subscribe((data: Waypoint[]) => {
-      this.sidWaypoints  = data;
+	this.airportService.findWaypointsFromSids(icao).subscribe((data: IcaoAndWaypoints) => {
+      this.sidWaypoints  = data.waypoints;
     });
   }
   
   retrieveWaypointsFromStars(icao: string) {
-	this.airportService.findWaypointsFromStars(icao).subscribe((data: Waypoint[]) => {
-      this.starWaypoints  = data;
+	this.airportService.findWaypointsFromStars(icao).subscribe((data: IcaoAndWaypoints) => {
+      this.starWaypoints  = data.waypoints;
     });
   }
   
