@@ -20,18 +20,18 @@ export class AppComponent {
   
   ClickedRow:any;
   
-  airportUid: string = "";
+  icao: string = "";
   
   constructor(private airportService: AirportService) {
 	this.ClickedRow = function(index: number) {
 		this.highlightRow = index;
-		this.airportUid = this.airports[index].uid
-		this.retrieveWaypointsFromSids(this.airportUid);
-		this.retrieveWaypointsFromStars(this.airportUid);
+		this.icao = this.airports[index].uid
+		this.retrieveWaypointsFromSids(this.icao);
+		this.retrieveWaypointsFromStars(this.icao);
 	}
 	interval(3000).subscribe((val:any) => { 
-		this.retrieveWaypointsFromSids(this.airportUid);
-		this.retrieveWaypointsFromStars(this.airportUid);
+		this.retrieveWaypointsFromSids(this.icao);
+		this.retrieveWaypointsFromStars(this.icao);
 	});
   }
   
@@ -41,14 +41,14 @@ export class AppComponent {
     });
   }
   
-  retrieveWaypointsFromSids(airportUid: string) {
-	this.airportService.findWaypointsFromSids(airportUid).subscribe((data: Waypoint[]) => {
+  retrieveWaypointsFromSids(icao: string) {
+	this.airportService.findWaypointsFromSids(icao).subscribe((data: Waypoint[]) => {
       this.sidWaypoints  = data;
     });
   }
   
-  retrieveWaypointsFromStars(airportUid: string) {
-	this.airportService.findWaypointsFromStars(airportUid).subscribe((data: Waypoint[]) => {
+  retrieveWaypointsFromStars(icao: string) {
+	this.airportService.findWaypointsFromStars(icao).subscribe((data: Waypoint[]) => {
       this.starWaypoints  = data;
     });
   }

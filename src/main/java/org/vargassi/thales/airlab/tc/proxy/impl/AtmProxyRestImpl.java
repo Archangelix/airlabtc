@@ -43,9 +43,9 @@ public class AtmProxyRestImpl implements AtmProxy {
     }
 
     @Override
-    public List<Sid> retrieveSids(String airportUid) {
+    public List<Sid> retrieveSids(String airportIcao) {
         try {
-            URL url = new URL(Constants.ATM_API_URL_SIDS+"/"+airportUid);
+            URL url = new URL(Constants.ATM_API_URL_SIDS+"/"+airportIcao);
     
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     
@@ -66,9 +66,9 @@ public class AtmProxyRestImpl implements AtmProxy {
     }
 
     @Override
-    public List<Star> retrieveStars(String airportUid) {
+    public List<Star> retrieveStars(String airportIcao) {
         try {
-            URL url = new URL(Constants.ATM_API_URL_STARS+"/"+airportUid);
+            URL url = new URL(Constants.ATM_API_URL_STARS+"/"+airportIcao);
     
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     

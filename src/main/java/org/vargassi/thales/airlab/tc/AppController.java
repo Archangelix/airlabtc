@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,13 +29,13 @@ public class AppController {
     }
 
     @RequestMapping("/waypoints/sid")
-    public List<Waypoint> getWaypointsMostAssociatedToSids(@RequestParam("airportuid") String airportUid) {
-        return atmManager.retrieveWaypointsMostAssociatedToSids(airportUid);
+    public List<Waypoint> getWaypointsMostAssociatedToSids(@RequestParam("icao") String airportIcao) {
+        return atmManager.retrieveWaypointsMostAssociatedToSids(airportIcao);
     }
 
     @RequestMapping("/waypoints/star")
-    public List<Waypoint> getWaypointsMostAssociatedToStars(@RequestParam("airportuid") String airportUid) {
-        return atmManager.retrieveWaypointsMostAssociatedToStars(airportUid);
+    public List<Waypoint> getWaypointsMostAssociatedToStars(@RequestParam("icao") String airportIcao) {
+        return atmManager.retrieveWaypointsMostAssociatedToStars(airportIcao);
     }
 
     @RequestMapping("/counters/inc")

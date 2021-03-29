@@ -23,11 +23,11 @@ export class AirportService {
     return this.http.get<Airport[]>(this.airportsUrl);
   }
 
-  public findWaypointsFromSids(airportUid: string): Observable<Waypoint[]> {
-    return this.http.get<Waypoint[]>(this.waypointsSidUrl+'?airportuid='+airportUid);
+  public findWaypointsFromSids(icao: string): Observable<Waypoint[]> {
+    return this.http.get<Waypoint[]>(this.waypointsSidUrl+'?icao='+icao);
   }
 
-  public findWaypointsFromStars(airportUid: string): Observable<Waypoint[]> {
-    return this.http.get<Waypoint[]>(this.waypointsStarUrl+'?airportuid='+airportUid);
+  public findWaypointsFromStars(icao: string): Observable<Waypoint[]> {
+    return this.http.get<Waypoint[]>(this.waypointsStarUrl+'?icao='+icao);
   }
 }

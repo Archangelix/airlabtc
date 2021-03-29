@@ -32,22 +32,22 @@ public class AtmManagerImpl implements AtmManager {
     private int counter = 0;
     
     @Override
-    public List<Waypoint> retrieveWaypointsMostAssociatedToSids(String airportUid) {
-        if (airportUid==null || airportUid.isEmpty()) {
+    public List<Waypoint> retrieveWaypointsMostAssociatedToSids(String airportIcao) {
+        if (airportIcao==null || airportIcao.isEmpty()) {
             return Lists.newArrayList();
         }
-        airportUid = airportUid.toUpperCase();
-        List<Sid> sids = atmProxy.retrieveSids(airportUid);
+        airportIcao = airportIcao.toUpperCase();
+        List<Sid> sids = atmProxy.retrieveSids(airportIcao);
         return extractTwoMostAssociatedWaypoints(sids);
     }
 
     @Override
-    public List<Waypoint> retrieveWaypointsMostAssociatedToStars(String airportUid) {
-        if (airportUid==null || airportUid.isEmpty()) {
+    public List<Waypoint> retrieveWaypointsMostAssociatedToStars(String airportIcao) {
+        if (airportIcao==null || airportIcao.isEmpty()) {
             return Lists.newArrayList();
         }
-        airportUid = airportUid.toUpperCase();
-        List<Star> stars = atmProxy.retrieveStars(airportUid);
+        airportIcao = airportIcao.toUpperCase();
+        List<Star> stars = atmProxy.retrieveStars(airportIcao);
         return extractTwoMostAssociatedWaypoints(stars);
     }
     
