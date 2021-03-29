@@ -21,7 +21,7 @@ public class AppController {
     
     @RequestMapping("/")
     public String index() {
-        return "Greetings to Mr. Iwan from Spring Boot!";
+        return "Greetings to Mr. Gabriel, Herve, and Florent from Spring Boot!";
     }
 
     @RequestMapping("/airports")
