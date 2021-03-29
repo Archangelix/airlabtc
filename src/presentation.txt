@@ -1,0 +1,105 @@
+SYSTEM ARCHITECTURE
+   
+|----------------|      |----------------|      |----------------|
+|                |      |                |      |                |
+|                |      |                |      |                |
+|  CLIENT GUI    | -->  |   TC SERVER    | <--> |    OPEN-ATM    |
+|                |      |                |      |                |
+|                |      |                |      |                |
+|----------------|      |----------------|      |----------------|
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CI / CD ARCHITECTURE
+   
+|----------------|        |----------------|                |----------------|         |----------------|        |----------------|
+|                |        |                |                |                |         |                |        |                |
+|                | push   |                | trigger CI/CD  |    GITLAB      |  build  |                | deploy |                |
+|  DEVELOPMENT   | ---->  |    GITHUB      | -------------> |    RUNNER      | <-----> |    RUNNER      | -----> |   KUBERNETES   |
+|                |        |                |                |                |         |                |        |                |
+|                |        |                |                |                |         |                |        |                |
+|----------------|        |----------------|                |----------------|         |----------------|        |----------------|
+                                |
+                                |
+                                |               |----------------|
+                                |               |                |
+                                |               |                |
+                                |-------------> |   TELEGRAM     |
+                                                |                |
+                                                |                |
+                                                |----------------|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Your feedback about the tech challenge and what you have learnt from it (please do at least one element which is new to you, and explain it to us)
+- Angular
+- GitLab
+- Telegram
+
+
+
+
+
+
+How would you work differently if this was not a test but a two week sprint
+- Strengthen the infrastructure first. For example: Deploy to external cloud instead of local.
+
+
+
+
+
+
+
+
+how to improve the code for production quality 
+- Monitoring
+- Performance Test
+- Sonar & Fortify
+- Code Review
